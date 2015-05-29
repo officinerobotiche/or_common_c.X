@@ -25,6 +25,16 @@ extern "C" {
 #include <stdint.h>        /* Includes uint16_t definition                    */
 #include <stdbool.h>       /* Includes true/false definition                  */
 #include <string.h>
+    
+/******************************************************************************/
+/* User Level #define Macros                                                  */
+/******************************************************************************/
+
+    #define SGN(x)  ( ((x) < 0) ?  -1 : ( ((x) == 0 ) ? 0 : 1) )
+
+/******************************************************************************/
+/* User Function Prototypes                                                   */
+/******************************************************************************/
 
     /**
      * Evaluate max value of array in int
@@ -41,8 +51,6 @@ extern "C" {
      * @return max value on array
      */
     float maxValueFloat(float *myArray, size_t size);
-
-
 
 #ifdef	__cplusplus
 }
