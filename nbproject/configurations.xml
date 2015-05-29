@@ -7,6 +7,9 @@
       <logicalFolder name="f1" displayName="hashmap" projectFiles="true">
         <itemPath>includes/hashmap/hashmap.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f2" displayName="or_math" projectFiles="true">
+        <itemPath>includes/or_math/math.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -17,6 +20,9 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="hashmap" projectFiles="true">
         <itemPath>src/hashmap/hashmap.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="or_math" projectFiles="true">
+        <itemPath>src/or_math/math.c</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
