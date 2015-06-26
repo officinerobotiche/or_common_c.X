@@ -10,6 +10,13 @@
       <logicalFolder name="f2" displayName="or_math" projectFiles="true">
         <itemPath>includes/or_math/math.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="peripherals" projectFiles="true">
+        <logicalFolder name="f1" displayName="i2c" projectFiles="true">
+          <itemPath>includes/peripherals/i2c/eeprom.h</itemPath>
+          <itemPath>includes/peripherals/i2c/led_pcf8574.h</itemPath>
+          <itemPath>includes/peripherals/i2c/i2c.h</itemPath>
+        </logicalFolder>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -24,6 +31,12 @@
       <logicalFolder name="f2" displayName="or_math" projectFiles="true">
         <itemPath>src/or_math/math.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f3" displayName="peripherals" projectFiles="true">
+        <logicalFolder name="f1" displayName="i2c" projectFiles="true">
+          <itemPath>src/peripherals/i2c/eeprom.c</itemPath>
+          <itemPath>src/peripherals/i2c/led_pcf8574.c</itemPath>
+        </logicalFolder>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -31,6 +44,10 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>src/peripherals_i2c</Elem>
+    <Elem>includes/peripherals_i2c</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="3">
@@ -42,7 +59,7 @@
         <platformTool>ICD3PlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.24</languageToolchainVersion>
-        <platform>4</platform>
+        <platform>3</platform>
       </toolsSet>
       <compileType>
         <linkerTool>
@@ -70,6 +87,7 @@
         <property key="code-model" value="default"/>
         <property key="const-model" value="default"/>
         <property key="data-model" value="default"/>
+        <property key="disable-instruction-scheduling" value="false"/>
         <property key="enable-all-warnings" value="true"/>
         <property key="enable-ansi-std" value="false"/>
         <property key="enable-ansi-warnings" value="false"/>
@@ -173,7 +191,8 @@
         <property key="warn-section-align" value="false"/>
       </C30-LD>
       <C30Global>
-        <property key="common-include-directories" value="includes"/>
+        <property key="common-include-directories"
+                  value="includes;../or_kernel_c.x/includes"/>
         <property key="dual-boot-partition" value="0"/>
         <property key="fast-math" value="false"/>
         <property key="generic-16-bit" value="false"/>
