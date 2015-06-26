@@ -9,6 +9,7 @@
       </logicalFolder>
       <logicalFolder name="f2" displayName="or_math" projectFiles="true">
         <itemPath>includes/or_math/math.h</itemPath>
+        <itemPath>includes/or_math/statistics.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="peripherals" projectFiles="true">
         <logicalFolder name="f1" displayName="i2c" projectFiles="true">
@@ -30,6 +31,7 @@
       </logicalFolder>
       <logicalFolder name="f2" displayName="or_math" projectFiles="true">
         <itemPath>src/or_math/math.c</itemPath>
+        <itemPath>src/or_math/statistics.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="peripherals" projectFiles="true">
         <logicalFolder name="f1" displayName="i2c" projectFiles="true">
