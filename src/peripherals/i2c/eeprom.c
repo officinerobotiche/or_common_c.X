@@ -54,7 +54,7 @@ typedef union _ee_address {
 static uint8_t eeprom_address = 0;
 
 static EEPROM_STATES_T memory_state = MCP24LC256_STATE_STOPPED;
-static hEvent_t memory_service_handle = INVALID_HANDLE;
+static hEvent_t memory_service_handle = INVALID_EVENT_HANDLE;
 
 static NVMemory_callbackFunc pcallerCallback = NULL;
 
@@ -70,7 +70,7 @@ static void EEPROM_callback(bool I2CtrxOK);
 /* EEPROM Functions                                                          */
 /*****************************************************************************/
 
-void EEPROM_service(int argc, char* argv) {
+void EEPROM_service(int argc, int* argv) {
     switch (memory_state) {
         case MCP24LC256_STATE_WAITING_WRITE:
             I2C_checkACK(MCP24LC256_COMMAND, &EEPROM_callback);
@@ -84,7 +84,10 @@ void EEPROM_service(int argc, char* argv) {
 }
 
 void EEPROM_init(void) {
-    memory_service_handle = register_event_p(&EEPROM_service, &_MODULE_EEPROM, EVENT_PRIORITY_LOW);
+    /// Register module
+    hModule_t eeprom_module = register_module(&_MODULE_EEPROM);
+    /// Register event
+    memory_service_handle = register_event_p(eeprom_module, &EEPROM_service, EVENT_PRIORITY_LOW);
 }
 
 void EEPROM_service_trigger(void) {

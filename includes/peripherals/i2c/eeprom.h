@@ -34,12 +34,6 @@ extern "C" {
     
     /**
      * 
-     * @param argc
-     * @param argv
-     */
-    void EEPROM_service(int argc, char* argv);
-    /**
-     * 
      */
     void EEPROM_init(void);
     /**
