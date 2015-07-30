@@ -35,7 +35,7 @@ extern "C" {
     /**
      * 
      */
-    void EEPROM_init(void);
+    void EEPROM_init(unsigned int timeout_write);
     /**
      * 
      */
