@@ -167,7 +167,7 @@ static void EEPROM_callback(bool I2CtrxOK) {
         // If waiting for write ACK, continue to wait
         if (memory_state != MCP24LC256_STATE_WAITING_WRITE) {
             memory_state = MCP24LC256_STATE_FAILED_TRX;
-            if (pcallerCallback != NULL) pcallerCallback(true);
+            if (pcallerCallback != NULL) pcallerCallback(false);
             pcallerCallback = NULL;
         }
         return;
@@ -181,9 +181,6 @@ static void EEPROM_callback(bool I2CtrxOK) {
             break;
         case MCP24LC256_STATE_WRITING:
             memory_state = MCP24LC256_STATE_WAITING_WRITE;
-            if (MCP24LC256_write_size == 0) {
-                EEPROM_write_chunk();
-            }
             break;
         case MCP24LC256_STATE_WAITING_WRITE:
             EEPROM_write_chunk();
