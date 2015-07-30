@@ -23,6 +23,7 @@
 /******************************************************************************/
 
 #include <system/events.h>
+#include <system/task_manager.h>
 
 #include <peripherals/i2c_controller.h>
 
@@ -55,6 +56,8 @@ static uint8_t eeprom_address = 0;
 
 static EEPROM_STATES_T memory_state = MCP24LC256_STATE_STOPPED;
 static hEvent_t memory_service_handle = INVALID_EVENT_HANDLE;
+/// Memory task handle
+static hTask_t memory_task_handle = INVALID_TASK_HANDLE;
 
 static NVMemory_callbackFunc pcallerCallback = NULL;
 
@@ -83,11 +86,13 @@ void EEPROM_service(int argc, int* argv) {
     }
 }
 
-void EEPROM_init(void) {
+void EEPROM_init(unsigned int timeout_write) {
     /// Register module
     hModule_t eeprom_module = register_module(&_MODULE_EEPROM);
     /// Register event
     memory_service_handle = register_event_p(eeprom_module, &EEPROM_service, EVENT_PRIORITY_LOW);
+    /// Register wait ACK event
+    memory_task_handle = task_load(memory_service_handle, timeout_write);
 }
 
 void EEPROM_service_trigger(void) {
@@ -136,6 +141,8 @@ static bool EEPROM_write_chunk(void) {
 
     // Check if writes are finished
     if (writeSize == 0) {
+        /// STOP task controller
+        task_set(memory_task_handle, STOP);
         memory_state = MCP24LC256_STATE_STOPPED;
         if (pcallerCallback != NULL) pcallerCallback(true);
         pcallerCallback = NULL;
@@ -167,7 +174,7 @@ static void EEPROM_callback(bool I2CtrxOK) {
         // If waiting for write ACK, continue to wait
         if (memory_state != MCP24LC256_STATE_WAITING_WRITE) {
             memory_state = MCP24LC256_STATE_FAILED_TRX;
-            if (pcallerCallback != NULL) pcallerCallback(true);
+            if (pcallerCallback != NULL) pcallerCallback(false);
             pcallerCallback = NULL;
         }
         return;
@@ -181,9 +188,8 @@ static void EEPROM_callback(bool I2CtrxOK) {
             break;
         case MCP24LC256_STATE_WRITING:
             memory_state = MCP24LC256_STATE_WAITING_WRITE;
-            if (MCP24LC256_write_size == 0) {
-                EEPROM_write_chunk();
-            }
+            /// Run task controller, wait ACK from EEPROM
+            task_set(memory_task_handle, RUN);
             break;
         case MCP24LC256_STATE_WAITING_WRITE:
             EEPROM_write_chunk();
