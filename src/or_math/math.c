@@ -56,3 +56,9 @@ float maxValueFloat(float* myArray, size_t size) {
     }
     return maxValue;
 }
+
+int NumberOfSetBits(int i) {
+     i = i - ((i >> 1) & 0x5555);
+     i = (i & 0x3333) + ((i >> 2) & 0x3333);
+     return (((i + (i >> 4)) & 0x0F0F) * 0x0101) >> 12;
+}

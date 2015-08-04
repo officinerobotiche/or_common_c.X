@@ -51,7 +51,13 @@ extern "C" {
      * @return max value on array
      */
     float maxValueFloat(float *myArray, size_t size);
-
+    /**
+     * 
+     * @param i
+     * @return 
+     */
+    int NumberOfSetBits(int i);
+    
 #ifdef	__cplusplus
 }
 #endif
