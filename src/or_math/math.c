@@ -63,3 +63,13 @@ int NumberOfSetBits(int x) {
         x &= x-1;
     return count;
 }
+
+int bitCount(unsigned int n) {
+
+    int counter = 0;
+    while(n) {
+        counter += n % 2;
+        n >>= 1;
+    }
+    return counter;
+ }

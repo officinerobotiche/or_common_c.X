@@ -58,6 +58,12 @@ extern "C" {
      * @return number of 1 in i
      */
     int NumberOfSetBits(int x);
+    /**
+     * Count position bit
+     * @param n variable
+     * @return position
+     */
+    int bitCount(unsigned int n);
     
 #ifdef	__cplusplus
 }

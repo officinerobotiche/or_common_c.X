@@ -25,6 +25,8 @@
 /* Global Variable Declaration                                               */
 /*****************************************************************************/
 
+int buff_lookuptable[] = {1, 2, 4, 16, 32, 64, 128, 256};
+
 /*****************************************************************************/
 /* Functions                                                                 */
 /*****************************************************************************/
@@ -46,4 +48,14 @@ void update_statistic(statistic_buffer* buff, int data) {
     buff->head = (unsigned int)(buff->head + 1) % STAT_BUFFER_SIZE;
     buff->sum += data - last_value;
     //printf("STAT last: %d - sum: %d\n", last_value, buff->sum);
+}
+
+inline int statistic_buff_mean(unsigned int* Buffer, int start, math_buffer_size_t size) {
+    int i;
+    long temp = 0;
+    int len = buff_lookuptable[size];
+    for(i = 0; i < len; ++i) {
+        temp += (Buffer)[i+start];
+    }
+    return temp >> size;
 }
