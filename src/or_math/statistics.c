@@ -57,5 +57,5 @@ inline int statistic_buff_mean(unsigned int* Buffer, int start, math_buffer_size
     for(i = 0; i < len; ++i) {
         temp += (Buffer)[i+start];
     }
-    return temp >> size;
+    return temp >> (size + 1);
 }
