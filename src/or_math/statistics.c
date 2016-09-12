@@ -53,7 +53,7 @@ void update_statistic(statistic_buffer* buff, int data) {
 inline int statistic_buff_mean(unsigned int* Buffer, int start, math_buffer_size_t size) {
     int i;
     long temp = 0;
-    int len = buff_lookuptable[size];
+    int len = buff_lookuptable[(int)size];
     for(i = 0; i < len; ++i) {
         temp += (Buffer)[i+start];
     }
