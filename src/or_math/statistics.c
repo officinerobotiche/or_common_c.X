@@ -42,11 +42,12 @@ void init_statistic_buffer(statistic_buffer* buff) {
     buff->sum = 0;
 }
 
-void update_statistic(statistic_buffer* buff, int data) {
-    int last_value = buff->buffer[buff->head];
+int32_t update_statistic(statistic_buffer* buff, int32_t data) {
+    int32_t last_value = buff->buffer[buff->head];
     buff->buffer[buff->head] = data;
-    buff->head = (unsigned int)(buff->head + 1) % STAT_BUFFER_SIZE;
+    buff->head = (uint16_t)(buff->head + 1) % STAT_BUFFER_SIZE;
     buff->sum += data - last_value;
+    return buff->sum / STAT_BUFFER_SIZE;
     //printf("STAT last: %d - sum: %d\n", last_value, buff->sum);
 }
 

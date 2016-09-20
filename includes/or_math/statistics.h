@@ -21,12 +21,14 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
+    
+#include <stdint.h>          /* For uint16_t definition                      */
 
 /******************************************************************************/
 /* System Level #define Macros                                                */
 /******************************************************************************/
     
-#define STAT_BUFFER_SIZE 16
+#define STAT_BUFFER_SIZE 4
     
     typedef enum _math_buffer_size {
         MATH_BUFF_1   = 0,
@@ -40,9 +42,9 @@ extern "C" {
     } math_buffer_size_t;
     
     typedef struct _statistic_buffer {
-        int buffer[STAT_BUFFER_SIZE];
-        unsigned int head;
-        long int sum;
+        int32_t buffer[STAT_BUFFER_SIZE];
+        uint16_t head;
+        int64_t sum;
     } statistic_buffer;
 
     
@@ -52,7 +54,7 @@ extern "C" {
     
 void init_statistic_buffer(statistic_buffer* buff);
 
-void update_statistic(statistic_buffer* buff, int data);
+int32_t update_statistic(statistic_buffer* buff, int32_t data);
 
 inline int statistic_buff_mean(unsigned int* Buffer, int start, math_buffer_size_t size);
 
