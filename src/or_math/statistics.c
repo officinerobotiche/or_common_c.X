@@ -25,7 +25,7 @@
 /* Global Variable Declaration                                               */
 /*****************************************************************************/
 
-int buff_lookuptable[] = {1, 2, 4, 16, 32, 64, 128, 256};
+int buff_lookuptable[] = {1, 2, 4, 8, 16, 32, 64, 128, 256};
 
 /*****************************************************************************/
 /* Functions                                                                 */
@@ -58,5 +58,5 @@ inline int statistic_buff_mean(unsigned int* Buffer, int start, math_buffer_size
     for(i = 0; i < len; ++i) {
         temp += (Buffer)[i+start];
     }
-    return temp >> (size + 1);
+    return temp >> size;
 }

@@ -34,11 +34,12 @@ extern "C" {
         MATH_BUFF_1   = 0,
         MATH_BUFF_2   = 1,
         MATH_BUFF_4   = 2,
-        MATH_BUFF_16  = 3,
-        MATH_BUFF_32  = 4,
-        MATH_BUFF_64  = 5,
-        MATH_BUFF_128 = 6,
-        MATH_BUFF_256 = 7,
+        MATH_BUFF_8   = 3,
+        MATH_BUFF_16  = 4,
+        MATH_BUFF_32  = 5,
+        MATH_BUFF_64  = 6,
+        MATH_BUFF_128 = 7,
+        MATH_BUFF_256 = 8,
     } math_buffer_size_t;
     
     typedef struct _statistic_buffer {
