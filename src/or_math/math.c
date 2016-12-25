@@ -56,3 +56,20 @@ float maxValueFloat(float* myArray, size_t size) {
     }
     return maxValue;
 }
+
+int NumberOfSetBits(int x) {
+    int count;
+    for (count=0; x; count++)
+        x &= x-1;
+    return count;
+}
+
+int bitCount(unsigned int n) {
+
+    int counter = 0;
+    while(n) {
+        counter += n % 2;
+        n >>= 1;
+    }
+    return counter;
+ }

@@ -51,7 +51,20 @@ extern "C" {
      * @return max value on array
      */
     float maxValueFloat(float *myArray, size_t size);
-
+    /**
+     * Count bit in a integer
+     * See https://en.wikipedia.org/wiki/Hamming_weight
+     * @param i Input integer
+     * @return number of 1 in i
+     */
+    int NumberOfSetBits(int x);
+    /**
+     * Count position bit
+     * @param n variable
+     * @return position
+     */
+    int bitCount(unsigned int n);
+    
 #ifdef	__cplusplus
 }
 #endif
